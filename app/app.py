@@ -56,14 +56,14 @@ text_posts = {
 }
 
 @app.get("/posts")
-def get_all_posts(limit: int = None):
+def get_all_posts(limit: int = None) -> list[PostResponse]:
     posts_list = list(text_posts.values())
     if limit:
         return posts_list[:limit]
     return posts_list
 
 @app.get("/posts/{id}")
-def get_post_by_id(id : int):
+def get_post_by_id(id : int) -> PostResponse:
     if id not in text_posts:
         raise HTTPException(404, "Post Not Found")
     else:
